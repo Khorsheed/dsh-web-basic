@@ -38,6 +38,9 @@ dsh --profile web-basic               # 启动
 
 每条用户消息带复制/编辑/撤回操作行。编辑是原位替换，保存后以新消息重新发送；撤回把消息及其后内容彻底移出模型上下文，折叠成可展开的分隔线；还能一键恢复到对话末尾。
 
+<details>
+<summary>展开查看功能示意（5 张）</summary>
+
 <img src="docs/screenshots/message-actions1.png" width="840" alt="message-tools:用户消息上的操作行">
 
 <img src="docs/screenshots/message-actions2.png" width="840" alt="message-tools:原位编辑并重新发送">
@@ -48,25 +51,43 @@ dsh --profile web-basic               # 启动
 
 <img src="docs/screenshots/message-actions5.png" width="840" alt="message-tools:恢复后消息原样回到对话">
 
+
+</details>
+
 ### message-timeline：历史消息时间轴
 
 会话左缘一条悬浮时间轴，一行一条用户消息。日常收成一条细线不占视线，悬停展开预览，点击直接把会话滚动到对应消息。
+
+<details>
+<summary>展开查看功能示意（2 张）</summary>
 
 <img src="docs/screenshots/message-timeline1.png" width="840" alt="message-timeline:悬停展开的时间轴">
 
 <img src="docs/screenshots/message-timeline2.png" width="840" alt="message-timeline:日常收成细线">
 
+
+</details>
+
 ### session-title-edit：会话标题内联编辑
 
 点击聊天头部标题旁的铅笔，标题本身变成输入框，回车即保存。用户改过的标题会被钉住，不再被自动生成覆盖。
+
+<details>
+<summary>展开查看功能示意（2 张）</summary>
 
 <img src="docs/screenshots/session-title-edit1.png" width="840" alt="session-title-edit:标题旁的内联编辑入口">
 
 <img src="docs/screenshots/session-title-edit2.png" width="840" alt="session-title-edit:直接修改标题，回车保存">
 
+
+</details>
+
 ### file-preview + ui-file-preview：会话产物预览
 
 「产物」tab 列出会话写入/编辑过的每个文件，选中即在页面内预览当前内容，还能逐轮回看每次改动的 diff——不用打开 IDE。
+
+<details>
+<summary>展开查看功能示意（3 张）</summary>
 
 <img src="docs/screenshots/file-preview1.png" width="840" alt="file-preview:文件列表与内联预览">
 
@@ -74,41 +95,74 @@ dsh --profile web-basic               # 启动
 
 <img src="docs/screenshots/file-preview3.png" width="840" alt="file-preview:产物 tab 总览">
 
+
+</details>
+
 ### taskpilot：后台任务与子 agent 胶囊
 
 聊天框上方两枚胶囊——「后台任务」和「子 agent」——随时查看运行状态、消耗，一键停止/中断，点开看详情抽屉。
+
+<details>
+<summary>展开查看功能示意（2 张）</summary>
 
 <img src="docs/screenshots/taskpilot1.png" width="840" alt="taskpilot:子 agent 胶囊与展开的列表">
 
 <img src="docs/screenshots/taskpilot2.png" width="840" alt="taskpilot:后台任务胶囊与详情抽屉">
 
+
+</details>
+
 ### context-guard：上下文压缩提醒
 
 上下文占用越过你配置的比例时，输入框工具栏自动出现压缩按钮，点击执行官方 /compact——在溢出拒绝请求之前提醒。比例可在设置里按偏好调整（0.01–1）。
+
+<details>
+<summary>展开查看功能示意（2 张）</summary>
 
 <img src="docs/screenshots/context-guard-button.png" width="840" alt="context-guard:输入框上的压缩按钮">
 
 <img src="docs/screenshots/context-guard-settings.png" width="840" alt="context-guard:提醒比例可配置">
 
+
+</details>
+
 ### ui-shortcuts：可自定义键位的快捷键
 
 Esc 暂停当前任务、Ctrl/Cmd+S 插队发送草稿、Ctrl/Cmd+O 新建会话。设置里点击键帽即可改键，偏好持久保存。
 
+<details>
+<summary>展开查看功能示意（1 张）</summary>
+
 <img src="docs/screenshots/07-ui-shortcuts.png" width="840" alt="ui-shortcuts:设置里的键位自定义">
+
+
+</details>
 
 ### whalesong：任务状态氛围
 
 只要有会话在跑，侧边栏的鲸鱼就喷水、标签页图标跟着动；任务完成或卡住等你时，播一小段提示音。页面活了。
 
+<details>
+<summary>展开查看功能示意（2 张）</summary>
+
 <img src="docs/screenshots/whalesong1.png" width="840" alt="whalesong:任务运行时鲸鱼喷水">
 
 <img src="docs/screenshots/whalesong2.png" width="840" alt="whalesong:完成时提示音与标签页图标变化">
+
+
+</details>
 
 ### ankh-guard：运维守护
 
 让 agent 自己改代码、自己重启，还不把服务搞挂：重启前先验证构建与测试（凭证绑定 git HEAD），验证不过就拦下；重启后金丝雀自动激活会话继续验证；起不来自动回滚到已知良好版本。
 
+<details>
+<summary>展开查看功能示意（1 张）</summary>
+
 <img src="docs/screenshots/ankh-guard.JPG" width="840" alt="ankh-guard:一次受守护的重启全过程">
+
+
+</details>
 
 ## 按你的方式调整
 
@@ -158,6 +212,9 @@ Every member is an independent plugin: the pack just installs them together, and
 
 Every user message carries a copy/edit/withdraw action row. Edits replace in place and re-send as a new message; withdraws remove the message and everything after it from the model's context, folding into an expandable divider; one click restores them to the end of the conversation.
 
+<details>
+<summary>View the screenshots (5)</summary>
+
 <img src="docs/screenshots/message-actions1.png" width="840" alt="message-tools: the action row on a user message">
 
 <img src="docs/screenshots/message-actions2.png" width="840" alt="message-tools: editing in place and re-sending">
@@ -168,25 +225,43 @@ Every user message carries a copy/edit/withdraw action row. Edits replace in pla
 
 <img src="docs/screenshots/message-actions5.png" width="840" alt="message-tools: restored messages return as they were">
 
+
+</details>
+
 #### message-timeline — history at a glance
 
 A floating timeline along the chat's left edge, one row per user message. At rest it is a thin rail out of sight; hover to expand a preview, click to scroll straight to that message.
+
+<details>
+<summary>View the screenshots (2)</summary>
 
 <img src="docs/screenshots/message-timeline1.png" width="840" alt="message-timeline: expanded on hover">
 
 <img src="docs/screenshots/message-timeline2.png" width="840" alt="message-timeline: at rest, a thin rail">
 
+
+</details>
+
 #### session-title-edit — rename inline
 
 Click the pencil beside the title in the chat header and the title itself becomes an input — Enter saves. A user-set title is pinned and never overwritten by auto-generation.
+
+<details>
+<summary>View the screenshots (2)</summary>
 
 <img src="docs/screenshots/session-title-edit1.png" width="840" alt="session-title-edit: the inline edit entry">
 
 <img src="docs/screenshots/session-title-edit2.png" width="840" alt="session-title-edit: type and hit Enter">
 
+
+</details>
+
 #### file-preview + ui-file-preview — session artifacts
 
 The Produced tab lists every file the session wrote or edited; select one to preview its current content in-page, or step through every change's diff turn by turn — no IDE needed.
+
+<details>
+<summary>View the screenshots (3)</summary>
 
 <img src="docs/screenshots/file-preview1.png" width="840" alt="file-preview: file list and inline preview">
 
@@ -194,41 +269,74 @@ The Produced tab lists every file the session wrote or edited; select one to pre
 
 <img src="docs/screenshots/file-preview3.png" width="840" alt="file-preview: the Produced tab overview">
 
+
+</details>
+
 #### taskpilot — pills for background work
 
 Two pills above the composer — background jobs and sub-agents — with live status and cost, one-click stop/interrupt, and a detail drawer.
+
+<details>
+<summary>View the screenshots (2)</summary>
 
 <img src="docs/screenshots/taskpilot1.png" width="840" alt="taskpilot: the sub-agent pill, expanded">
 
 <img src="docs/screenshots/taskpilot2.png" width="840" alt="taskpilot: the jobs pill and detail drawer">
 
+
+</details>
+
 #### context-guard — compact before you run out
 
 When context occupancy crosses your configured ratio, a compact button appears in the composer toolbar — one click runs the official /compact, before overflow starts rejecting requests. The ratio is yours to tune (0.01–1).
+
+<details>
+<summary>View the screenshots (2)</summary>
 
 <img src="docs/screenshots/context-guard-button.png" width="840" alt="context-guard: the compact button">
 
 <img src="docs/screenshots/context-guard-settings.png" width="840" alt="context-guard: the configurable ratio">
 
+
+</details>
+
 #### ui-shortcuts — rebindable keys
 
 Esc pauses the current task, Ctrl/Cmd+S steer-sends your draft, Ctrl/Cmd+O starts a new session. Click a keycap in settings to rebind; preferences persist.
 
+<details>
+<summary>View the screenshots (1)</summary>
+
 <img src="docs/screenshots/07-ui-shortcuts.png" width="840" alt="ui-shortcuts: rebinding keys in settings">
+
+
+</details>
 
 #### whalesong — ambient status
 
 While any session runs, the sidebar whale spouts and the tab icon moves; when a run finishes or stalls waiting for you, a short chime plays. The page feels alive.
 
+<details>
+<summary>View the screenshots (2)</summary>
+
 <img src="docs/screenshots/whalesong1.png" width="840" alt="whalesong: spouting while tasks run">
 
 <img src="docs/screenshots/whalesong2.png" width="840" alt="whalesong: chime and tab icon on completion">
+
+
+</details>
 
 #### ankh-guard — ops guard
 
 Let the agent change its own code and restart its own service without taking it down: restarts require a green build+test credential bound to the git HEAD; after the restart a canary reactivates the session to keep verifying; repeated boot failures roll back to the last known-good version.
 
+<details>
+<summary>View the screenshots (1)</summary>
+
 <img src="docs/screenshots/ankh-guard.JPG" width="840" alt="ankh-guard: a guarded restart, end to end">
+
+
+</details>
 
 ### Make it yours
 
