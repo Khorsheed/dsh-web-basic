@@ -170,6 +170,10 @@ Esc 暂停当前任务、Ctrl/Cmd+S 插队发送草稿、Ctrl/Cmd+O 新建会话
 - **加装**:任何 `@khorsheed/dsh-*` 插件同样一条 `add` 命令
 - **更新**:`dsh plugin --profile web-basic update` 拉取范围内最新版本
 
+## 变更记录
+
+见 [CHANGELOG.md](CHANGELOG.md)。
+
 ## 开发
 
 插件源码在 [Khorsheed/dsh-plugins](https://github.com/Khorsheed/dsh-plugins)（唯一事实源）。本仓只有 profile 模板与文档，不含插件代码。欢迎 issue。
@@ -343,6 +347,10 @@ Let the agent change its own code and restart its own service without taking it 
 - **Remove a member**: `dsh plugin --profile web-basic remove @khorsheed/dsh-<name>` — the rest keep working. The bundle is a starting point, not a lock-in.
 - **Add more**: any `@khorsheed/dsh-*` plugin installs with the same `add` command.
 - **Update**: `dsh plugin --profile web-basic update` pulls the newest versions in range.
+
+### Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ### Developing
 
