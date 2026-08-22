@@ -14,7 +14,7 @@ sh dsh-web-basic/scripts/install.sh   # 把 profile 拷进 $DSH_HOME 并安装
 dsh --profile web-basic               # 启动
 ```
 
-> **状态**：成员插件正在首发 npm（第一波）。成员上架后安装即可用——关注本仓。
+> **状态**：10 个成员插件已上架 npm（0.1.0）。
 
 ## 包含什么
 

@@ -12,7 +12,7 @@ sh dsh-web-basic/scripts/install.sh   # copies the profile into $DSH_HOME and in
 dsh --profile web-basic               # boot it
 ```
 
-> **Status**: member plugins are publishing to npm now (first wave). The installer works as soon as they land — watch this repo.
+> **Status**: all 10 member plugins are live on npm (0.1.0).
 
 ## What's inside
 
