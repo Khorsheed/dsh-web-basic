@@ -2,12 +2,13 @@
   "name": "dsh-profile-web-basic",
   "private": true,
   "dependencies": {
+    "@khorsheed/dsh-ankh-guard": "^0.1.0-rc.8.9",
     "@khorsheed/dsh-client-message-tools": "^0.4.9",
+    "@khorsheed/dsh-client-session-title-edit": "^0.1.0-rc.6",
+    "@khorsheed/dsh-client-ui-file-preview": "^0.1.0-rc.5",
     "@khorsheed/dsh-context-guard": "^0.1.0-rc.6",
     "@khorsheed/dsh-file-preview": "^0.1.0-rc.5",
     "@khorsheed/dsh-message-timeline": "^0.1.0-rc.6",
-    "@khorsheed/dsh-client-session-title-edit": "^0.1.0-rc.6",
-    "@khorsheed/dsh-client-ui-file-preview": "^0.1.0-rc.5",
     "@khorsheed/dsh-taskpilot": "^0.1.0-rc.6.1",
     "@khorsheed/dsh-ui-shortcuts": "^0.1.0-rc.5",
     "@khorsheed/dsh-whalesong": "^0.1.0-rc.5"
@@ -25,7 +26,8 @@
         "@khorsheed/dsh-client-ui-file-preview",
         "@khorsheed/dsh-taskpilot",
         "@khorsheed/dsh-ui-shortcuts",
-        "@khorsheed/dsh-whalesong"
+        "@khorsheed/dsh-whalesong",
+        "@khorsheed/dsh-ankh-guard"
       ]
     }
   }
