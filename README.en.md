@@ -4,7 +4,15 @@
 
 **One profile, and your dsh web GUI feels finished.** Edit or withdraw sent messages, jump through long conversations, preview every file the agent touched, watch background jobs at a glance, get nudged before context runs out — the quality-of-life layer most users reach for first, installed in one go.
 
-## Quick start
+## Install
+
+**With an agent (recommended)**: once you have [dsh](https://github.com/deepseek-ai/deepseek-harness), just tell it:
+
+> **Install this for me: https://github.com/Khorsheed/dsh-web-basic**
+
+It will follow the "Install guide for agents" below — install, self-check, and hand your current instance over to the pack on the same port. All you do is hard-refresh (Cmd/Ctrl+Shift+R) when it's done.
+
+**Manual install**: no agent? Run three commands yourself:
 
 ```sh
 git clone https://github.com/Khorsheed/dsh-web-basic.git
@@ -14,7 +22,7 @@ sh dsh-web-basic/scripts/restart-into-web-basic.sh   # hands the running instanc
 
 `restart-into-web-basic.sh` stops your current instance and brings web-basic up **on the same port** — just refresh the browser tab you already have. To run the pack side by side instead, boot it on a different port: `dsh --profile web-basic --port 3090`.
 
-> **Status**: all 10 member plugins are live on npm (0.1.0). Have an agent? Just say: **"Install this for me: https://github.com/Khorsheed/dsh-web-basic"** — it will follow the guide below to install, self-check, and hand over on the same port.
+> **Status**: all 10 member plugins are live on npm (0.1.0).
 
 <details>
 <summary><strong>Install guide for agents</strong> (follow this when the user says "install this for me")</summary>
