@@ -14,4 +14,6 @@ fi
 mkdir -p "$DSH_HOME/profiles"
 cp -r "$SRC" "$DEST"
 dsh plugin --profile web-basic install
-echo "dsh-web-basic: installed into $DEST — boot with: dsh --profile web-basic"
+ROWS=$(dsh --profile web-basic --dump-config 2>/dev/null | grep -c '^- id: ' || true)
+echo "dsh-web-basic: installed into $DEST — $ROWS loader rows composed"
+echo "next: sh $(cd "$(dirname "$0")/.." && pwd)/scripts/restart-into-web-basic.sh   # hand the running instance over to web-basic on the same port"

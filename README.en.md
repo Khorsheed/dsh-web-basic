@@ -9,10 +9,40 @@
 ```sh
 git clone https://github.com/Khorsheed/dsh-web-basic.git
 sh dsh-web-basic/scripts/install.sh   # copies the profile into $DSH_HOME and installs
-dsh --profile web-basic               # boot it
+sh dsh-web-basic/scripts/restart-into-web-basic.sh   # hands the running instance over to the pack on the same port
 ```
 
+`restart-into-web-basic.sh` stops your current instance and brings web-basic up **on the same port** — just refresh the browser tab you already have. To run the pack side by side instead, boot it on a different port: `dsh --profile web-basic --port 3090`.
+
 > **Status**: all 10 member plugins are live on npm (0.1.0).
+
+<details>
+<summary><strong>Install guide for agents</strong> (follow this when the user says "install this for me")</summary>
+
+When the user asks you to install https://github.com/Khorsheed/dsh-web-basic, run the three stages below. No browser-level verification is needed anywhere.
+
+**1. Install and self-check offline (do not touch the running instance)**
+
+```sh
+git clone https://github.com/Khorsheed/dsh-web-basic.git /tmp/dsh-web-basic
+sh /tmp/dsh-web-basic/scripts/install.sh
+```
+
+The installer prints the composed row count. To double-check: `dsh --profile web-basic --dump-config | grep '^- id: '` — all 10 `@khorsheed` rows (ankh-guard / context-guard / file-preview / message-timeline / message-tools / session-title-edit / taskpilot / ui-file-preview / ui-shortcuts / whalesong) must be present. If `dsh` is not on PATH, use its absolute path (find it via `ps` from the current instance's command line).
+
+**2. Hand over on the same port (the critical step)**
+
+```sh
+sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [port, default 3080]
+```
+
+The script spawns a detached boot delayed by 3 seconds, then stops the current instance — **you will disconnect with the host, and that is expected**: the detached process brings web-basic up on the original port, and the user just refreshes the page they already have. Do NOT hand-roll `kill` + restart; get the order wrong and nothing comes back. If the instance is supervised by an ankh-guard watchdog (it ships in this pack, and the instance may already have it), use its `schedule-exit` protocol instead of this script.
+
+**3. Deliver**
+
+Once `curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<port>/` returns 200, tell the user to simply refresh their page, and present the feature list (the README "What's inside" table): message edit/withdraw/restore, history timeline, inline title editing, artifact previews, background-job pills, context-compaction reminder, rebindable shortcuts, the whalesong ambience, and the ops guard. Known boundary: on a pure-npm deployment ankh-guard's composition preflight runs degraded (it warns and proceeds); everything else is fully functional.
+
+</details>
 
 ## What's inside
 

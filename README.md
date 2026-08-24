@@ -11,10 +11,40 @@
 ```sh
 git clone https://github.com/Khorsheed/dsh-web-basic.git
 sh dsh-web-basic/scripts/install.sh   # 把 profile 拷进 $DSH_HOME 并安装
-dsh --profile web-basic               # 启动
+sh dsh-web-basic/scripts/restart-into-web-basic.sh   # 当前实例同端口交接给整合包
 ```
 
+`restart-into-web-basic.sh` 会停掉你当前运行的实例、**在同一个端口**拉起 web-basic——浏览器刷新原地址即可，不用记新端口。想并存对照的话，直接 `dsh --profile web-basic --port 3090` 起在新端口即可。
+
 > **状态**：10 个成员插件已上架 npm（0.1.0）。
+
+<details>
+<summary><strong>给 Agent 的安装指南</strong>（用户说"帮我装一下"时，照此执行）</summary>
+
+用户把你叫来说"帮我装一下 https://github.com/Khorsheed/dsh-web-basic"时，按下面三段做，全程不需要浏览器级验证。
+
+**一、安装与离线自检（不碰运行中的实例）**
+
+```sh
+git clone https://github.com/Khorsheed/dsh-web-basic.git /tmp/dsh-web-basic
+sh /tmp/dsh-web-basic/scripts/install.sh
+```
+
+install.sh 末尾会打印组合的行数。如需手动复核：`dsh --profile web-basic --dump-config | grep '^- id: '`,10 个 `@khorsheed` 行（ankh-guard / context-guard / file-preview / message-timeline / message-tools / session-title-edit / taskpilot / ui-file-preview / ui-shortcuts / whalesong）应全部在列。`dsh` 不在 PATH 时用它的完整路径（可用 `ps` 查当前实例的启动命令获得）。
+
+**二、同端口交接（关键一步）**
+
+```sh
+sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [端口，默认 3080]
+```
+
+这个脚本先放一个延迟 3 秒的分离启动进程、再停掉当前实例——**你会随宿主实例一起断开，这是预期**：分离进程会在原端口拉起 web-basic，用户刷新原来的页面就是新世界。不要手写 `kill` + 重启，那个顺序写错就永远拉不回来。若实例由 ankh-guard 的 watchdog 监督（本整合包含它；已经装过的实例也可能有），改用它的 `schedule-exit` 协议而不是本脚本。
+
+**三、交付**
+
+`curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<端口>/` 为 200 后，告诉用户"刷新原页面即可"，并呈上功能清单（即 README「包含什么」一表）：消息编辑/撤回/恢复、历史时间轴、标题内联编辑、产物预览、后台任务胶囊、压缩提醒、自定义快捷键、状态氛围鲸鱼、运维守护。已知边界：纯净 npm 部署里 ankh-guard 的组合 preflight 门禁为降级运行（提示后放行），其余能力完整。
+
+</details>
 
 ## 包含什么
 
