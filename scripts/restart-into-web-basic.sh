@@ -43,7 +43,10 @@ node "$GUARD" record deployment --command "install.sh completed; web-basic compo
 # 2. Adopt the current instance with web-basic's boot as the respawn command,
 #    then schedule the exit: watchdog stops the old instance and boots the pack
 #    with a canary. The agent calling this disconnects with its host — expected.
+#    NOTE: no --initiator here — schedule-exit picks up $DSH_SESSION_ID from the
+#    calling agent's environment, and the restart report can only find its
+#    owner (the session that asked for the install) through the real session id.
 node "$GUARD" supervise --port "$PORT" --start "DSH_HOME='$HOME_DIR' '$DSH_BIN' --profile web-basic --port $PORT --no-open" --state-dir "$STATE" --home "$HOME_DIR"
-node "$GUARD" schedule-exit --port "$PORT" --delay-ms "$DELAY_MS" --initiator web-basic-install --profile web-basic --state-dir "$STATE" --repo "$CLONE"
+node "$GUARD" schedule-exit --port "$PORT" --delay-ms "$DELAY_MS" --profile web-basic --state-dir "$STATE" --repo "$CLONE"
 
 echo "web-basic will replace the instance on :$PORT in ${DELAY_MS}ms — refresh the page when it is back. The watchdog now supervises this instance."

@@ -36,7 +36,7 @@ The installer prints the composed row count. To double-check: `dsh --profile web
 sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [port, default 3080]
 ```
 
-The script drives the pack's own ankh-guard watchdog: environment probe → record a credential → adopt the current instance → watchdog stops the old one and boots the pack with a canary. **You will disconnect with the host — that is expected**: the watchdog brings web-basic up on the original port, the user just refreshes, and the instance is guarded from then on (automatic rollback if a boot ever fails).
+The script drives the pack's own ankh-guard watchdog: environment probe → record a credential → adopt the current instance → watchdog stops the old one and boots the pack with a canary. **You will disconnect with the host — that is expected**: the watchdog brings web-basic up on the original port. The script deliberately omits `--initiator` so the guard reads `$DSH_SESSION_ID` from your environment — that is how the restart report finds your session: when the user reopens it, you receive the "restart complete" followup and continue. Note: snapshot-based continuation of interrupted turns needs the guard already mounted in the old instance (absent on a first install); that part exists from the second restart onward.
 
 Two prerequisites — the script refuses early with a reason if either is missing:
 

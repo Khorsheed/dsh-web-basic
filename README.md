@@ -38,7 +38,7 @@ install.sh 末尾会打印组合的行数。如需手动复核：`dsh --profile 
 sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [端口，默认 3080]
 ```
 
-脚本走整合包自带的 ankh-guard 守卫通道：环境探针 → 记录凭证 → 接管当前实例 → watchdog 停旧启新 + canary 验证。**你会随宿主实例一起断开，这是预期**——watchdog 会在原端口拉起 web-basic，用户刷新原页面即可，且实例从此被守护（起不来会自动回滚）。
+脚本走整合包自带的 ankh-guard 守卫通道：环境探针 → 记录凭证 → 接管当前实例 → watchdog 停旧启新 + canary 验证。**你会随宿主实例一起断开，这是预期**——watchdog 会在原端口拉起 web-basic；脚本刻意不传 `--initiator`，守卫会从你的环境读取 `$DSH_SESSION_ID`，重启报告才能寻址到你的会话：用户重新打开这个会话时，你会收到「重启完成」的 followup 并继续。注意：中断回合的快照续跑依赖旧实例里已挂载 guard（首次交接不具备），从第二次重启起才完整。
 
 两个前置，缺一会被脚本拒绝并给出原因：
 
