@@ -47,7 +47,7 @@ sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [端口，默认 3080]
 
 **三、交付**
 
-`curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<端口>/` 为 200 后，告诉用户"刷新原页面即可"，并呈上功能清单（即 README「包含什么」一表）：消息编辑/撤回/恢复、历史时间轴、标题内联编辑、产物预览、后台任务胶囊、压缩提醒、自定义快捷键、状态氛围鲸鱼、运维守护。已知边界：纯净 npm 部署里 ankh-guard 的组合 preflight 门禁为降级运行（提示后放行），其余能力完整。
+`curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<端口>/` 为 200 后，让用户**硬刷**页面（Cmd/Ctrl+Shift+R)——产物 tab、任务胶囊等新的 client bundle 要强刷才会加载，普通刷新可能继续跑缓存的旧壳。然后呈上功能清单（即 README「包含什么」一表）：消息编辑/撤回/恢复、历史时间轴、标题内联编辑、产物预览、后台任务胶囊、压缩提醒、自定义快捷键、状态氛围鲸鱼、运维守护。已知边界：纯净 npm 部署里 ankh-guard 的组合 preflight 门禁为降级运行（提示后放行），其余能力完整。
 
 </details>
 

@@ -16,7 +16,6 @@
 set -eu
 
 PORT="${1:-3080}"
-DELAY_MS=3000
 DSH_BIN="${DSH_BIN:-dsh}"
 HOME_DIR="${DSH_HOME:-$HOME/.dsh}"
 CLONE="$(cd "$(dirname "$0")/.." && pwd)"
@@ -40,13 +39,14 @@ fi
 node "$GUARD" checkpoint --message "web-basic install" --repo "$CLONE" --state-dir "$STATE"
 node "$GUARD" record deployment --command "install.sh completed; web-basic composition verified offline" --repo "$CLONE" --state-dir "$STATE"
 
-# 2. Adopt the current instance with web-basic's boot as the respawn command,
-#    then schedule the exit: watchdog stops the old instance and boots the pack
-#    with a canary. The agent calling this disconnects with its host — expected.
-#    NOTE: no --initiator here — schedule-exit picks up $DSH_SESSION_ID from the
-#    calling agent's environment, and the restart report can only find its
-#    owner (the session that asked for the install) through the real session id.
-node "$GUARD" supervise --port "$PORT" --start "DSH_HOME='$HOME_DIR' '$DSH_BIN' --profile web-basic --port $PORT --no-open" --state-dir "$STATE" --home "$HOME_DIR"
-node "$GUARD" schedule-exit --port "$PORT" --delay-ms "$DELAY_MS" --profile web-basic --state-dir "$STATE" --repo "$CLONE"
+# 2. Drive the handoff with the `restart` verb — one self-contained
+#    stop→start→canary shot. Do NOT pre-adopt with `supervise`: the ankh-guard
+#    plugin inside web-basic establishes supervision itself when the pack
+#    boots, and a pre-adopted watchdog plus the plugin's own means TWO
+#    supervisors on the same port — every restart report then arrives twice
+#    (2026-08-24, observed on the 3086 acceptance run).
+#    NOTE: no --initiator here — the restart report finds its owner (the
+#    session that asked for the install) via $DSH_SESSION_ID in your env.
+node "$GUARD" restart --port "$PORT" --start "DSH_HOME='$HOME_DIR' '$DSH_BIN' --profile web-basic --port $PORT --no-open" --profile web-basic --state-dir "$STATE" --repo "$CLONE"
 
-echo "web-basic will replace the instance on :$PORT in ${DELAY_MS}ms — refresh the page when it is back. The watchdog now supervises this instance."
+echo "handing the instance on :$PORT over to web-basic (stop → start → canary) — this session will disconnect; the pack comes back on the same port, supervised."

@@ -45,7 +45,7 @@ Two prerequisites — the script refuses early with a reason if either is missin
 
 **3. Deliver**
 
-Once `curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<port>/` returns 200, tell the user to simply refresh their page, and present the feature list (the README "What's inside" table): message edit/withdraw/restore, history timeline, inline title editing, artifact previews, background-job pills, context-compaction reminder, rebindable shortcuts, the whalesong ambience, and the ops guard. Known boundary: on a pure-npm deployment ankh-guard's composition preflight runs degraded (it warns and proceeds); everything else is fully functional.
+Once `curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<port>/` returns 200, ask the user to **hard-refresh** (Cmd/Ctrl+Shift+R) — the new client bundles (the Produced tab, the dock pills, …) only load on a hard refresh; a plain reload may keep serving the cached shell. Then present the feature list (the README "What's inside" table): message edit/withdraw/restore, history timeline, inline title editing, artifact previews, background-job pills, context-compaction reminder, rebindable shortcuts, the whalesong ambience, and the ops guard. Known boundary: on a pure-npm deployment ankh-guard's composition preflight runs degraded (it warns and proceeds); everything else is fully functional.
 
 </details>
 
