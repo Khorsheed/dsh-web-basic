@@ -28,7 +28,7 @@ git clone https://github.com/Khorsheed/dsh-web-basic.git /tmp/dsh-web-basic
 sh /tmp/dsh-web-basic/scripts/install.sh
 ```
 
-The installer prints the composed row count. To double-check: `dsh --profile web-basic --dump-config | grep '^- id: '` — all 10 `@khorsheed` rows (ankh-guard / context-guard / file-preview / message-timeline / message-tools / session-title-edit / taskpilot / ui-file-preview / ui-shortcuts / whalesong) must be present. If `dsh` is not on PATH, use its absolute path (find it via `ps` from the current instance's command line).
+The installer prints the composed row count. To double-check: `dsh --profile web-basic --dump-config | grep -c "@khorsheed"` should print 10 (ankh-guard / context-guard / file-preview / message-timeline / message-tools / session-title-edit / taskpilot / ui-file-preview / ui-shortcuts / whalesong). If `dsh` is not on PATH, use its absolute path (find it via `ps` from the current instance's command line).
 
 **2. Hand over on the same port (the critical step)**
 
@@ -36,7 +36,12 @@ The installer prints the composed row count. To double-check: `dsh --profile web
 sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [port, default 3080]
 ```
 
-The script spawns a detached boot delayed by 3 seconds, then stops the current instance — **you will disconnect with the host, and that is expected**: the detached process brings web-basic up on the original port, and the user just refreshes the page they already have. Do NOT hand-roll `kill` + restart; get the order wrong and nothing comes back. If the instance is supervised by an ankh-guard watchdog (it ships in this pack, and the instance may already have it), use its `schedule-exit` protocol instead of this script.
+The script drives the pack's own ankh-guard watchdog: environment probe → record a credential → adopt the current instance → watchdog stops the old one and boots the pack with a canary. **You will disconnect with the host — that is expected**: the watchdog brings web-basic up on the original port, the user just refreshes, and the instance is guarded from then on (automatic rollback if a boot ever fails).
+
+Two prerequisites — the script refuses early with a reason if either is missing:
+
+- **Session permissions**: in a sandboxed session (writes fenced to the workspace), the detached watchdog gets reaped when the turn ends and the script refuses up front. Ask the user to switch to full-access mode (or hand them the command to run in a plain terminal).
+- **Do NOT substitute `nohup ... &` or a hand-rolled `kill` + restart**: sandboxes reap by process tree, nohup does not protect against that, and a wrong stop/start order never comes back.
 
 **3. Deliver**
 

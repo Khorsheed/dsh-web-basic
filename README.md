@@ -30,7 +30,7 @@ git clone https://github.com/Khorsheed/dsh-web-basic.git /tmp/dsh-web-basic
 sh /tmp/dsh-web-basic/scripts/install.sh
 ```
 
-install.sh 末尾会打印组合的行数。如需手动复核：`dsh --profile web-basic --dump-config | grep '^- id: '`,10 个 `@khorsheed` 行（ankh-guard / context-guard / file-preview / message-timeline / message-tools / session-title-edit / taskpilot / ui-file-preview / ui-shortcuts / whalesong）应全部在列。`dsh` 不在 PATH 时用它的完整路径（可用 `ps` 查当前实例的启动命令获得）。
+install.sh 末尾会打印组合的行数。如需手动复核：`dsh --profile web-basic --dump-config | grep -c "@khorsheed"` 应为 10(ankh-guard / context-guard / file-preview / message-timeline / message-tools / session-title-edit / taskpilot / ui-file-preview / ui-shortcuts / whalesong)。`dsh` 不在 PATH 时用它的完整路径（可用 `ps` 查当前实例的启动命令获得）。
 
 **二、同端口交接（关键一步）**
 
@@ -38,7 +38,12 @@ install.sh 末尾会打印组合的行数。如需手动复核：`dsh --profile 
 sh /tmp/dsh-web-basic/scripts/restart-into-web-basic.sh [端口，默认 3080]
 ```
 
-这个脚本先放一个延迟 3 秒的分离启动进程、再停掉当前实例——**你会随宿主实例一起断开，这是预期**：分离进程会在原端口拉起 web-basic，用户刷新原来的页面就是新世界。不要手写 `kill` + 重启，那个顺序写错就永远拉不回来。若实例由 ankh-guard 的 watchdog 监督（本整合包含它；已经装过的实例也可能有），改用它的 `schedule-exit` 协议而不是本脚本。
+脚本走整合包自带的 ankh-guard 守卫通道：环境探针 → 记录凭证 → 接管当前实例 → watchdog 停旧启新 + canary 验证。**你会随宿主实例一起断开，这是预期**——watchdog 会在原端口拉起 web-basic，用户刷新原页面即可，且实例从此被守护（起不来会自动回滚）。
+
+两个前置，缺一会被脚本拒绝并给出原因：
+
+- **会话权限**：如果你运行在沙箱会话里（工作区外写入受限），分离的 watchdog 会在回合结束时被回收——脚本会提前拒绝。请用户切到完全权限模式再跑（或直接给用户这条命令让 TA 在终端跑）。
+- **不要在沙箱里用 `nohup ... &` 或手写 `kill` + 重启代替**：沙箱按进程树回收，nohup 防不住；手写顺序错了实例永远回不来。
 
 **三、交付**
 
