@@ -16,7 +16,7 @@ sh dsh-web-basic/scripts/restart-into-web-basic.sh   # 当前实例同端口交�
 
 `restart-into-web-basic.sh` 会停掉你当前运行的实例、**在同一个端口**拉起 web-basic——浏览器刷新原地址即可，不用记新端口。想并存对照的话，直接 `dsh --profile web-basic --port 3090` 起在新端口即可。
 
-> **状态**：10 个成员插件已上架 npm（0.1.0）。
+> **状态**：10 个成员插件已上架 npm（0.1.0）。装了 agent 的话，直接对它说：**「帮我装一下这个：https://github.com/Khorsheed/dsh-web-basic」**——它会按下面的指南完成安装、自检和同端口交接。
 
 <details>
 <summary><strong>给 Agent 的安装指南</strong>（用户说"帮我装一下"时，照此执行）</summary>

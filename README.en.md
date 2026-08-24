@@ -14,7 +14,7 @@ sh dsh-web-basic/scripts/restart-into-web-basic.sh   # hands the running instanc
 
 `restart-into-web-basic.sh` stops your current instance and brings web-basic up **on the same port** — just refresh the browser tab you already have. To run the pack side by side instead, boot it on a different port: `dsh --profile web-basic --port 3090`.
 
-> **Status**: all 10 member plugins are live on npm (0.1.0).
+> **Status**: all 10 member plugins are live on npm (0.1.0). Have an agent? Just say: **"Install this for me: https://github.com/Khorsheed/dsh-web-basic"** — it will follow the guide below to install, self-check, and hand over on the same port.
 
 <details>
 <summary><strong>Install guide for agents</strong> (follow this when the user says "install this for me")</summary>
