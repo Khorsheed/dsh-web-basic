@@ -1,6 +1,8 @@
 # dsh-web-basic
 
-中文 | [English](README.en.md)
+> 镜像仓：与 [Khorsheed/dsh-plugins](https://github.com/Khorsheed/dsh-plugins) 的 `profiles/web-basic` 自动同步。Issue 欢迎提在本仓；PR 请提交到 monorepo。
+>
+> 中文 | [English](README.en.md)
 
 **一个 profile，让 dsh web GUI 变得完整。** 发出去的消息可以改、可以撤；长对话一键跳转；agent 写过的文件随手预览；后台任务一目了然；上下文快满时有人提醒——大多数用户最先想要的那层体验，一次装齐。
 
